@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct TreeNode {
+    int data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+TreeNode* createNewNode(int data) {
+    TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+void inOrderTraversal(TreeNode* root) {
+    if (root == NULL) {
+        return;
+    }
+    inOrderTraversal(root->left);
+    printf("%i, ", root->data);
+    inOrderTraversal(root->right);
+}
+
+void preOrderTraversal(TreeNode* root) {
+    if (root == NULL) {
+        return;
+    }
+    printf("%i, ", root->data);
+    preOrderTraversal(root->left);
+    preOrderTraversal(root->right);
+}
+
+void postOrderTraversal(TreeNode* root) {
+    if (root == NULL) {
+        return;
+    }
+    postOrderTraversal(root->left);
+    postOrderTraversal(root->right);
+    printf("%i, ", root->data);
+}
+
+
+int main() {
+    TreeNode* root = createNewNode(5);
+    
+    TreeNode* node12 = createNewNode(12);
+    TreeNode* node13 = createNewNode(13);
+    
+    TreeNode* node7 = createNewNode(7);
+    TreeNode* node14 = createNewNode(14);
+    TreeNode* node2 = createNewNode(2);
+    
+    TreeNode* node17 = createNewNode(17);
+    TreeNode* node23 = createNewNode(23);
+    TreeNode* node27 = createNewNode(27);
+    TreeNode* node3 = createNewNode(3);
+    TreeNode* node8 = createNewNode(8);
+    TreeNode* node11 = createNewNode(11);
+
+    root->left = node12;
+    root->right = node13;
+
+    node12->left = node7;
+
+    node13->left = node14;
+    node13->right = node2;
+
+    node7->left = node17;
+    node7->right = node23;
+    
+    node14->left = node27;
+    node14->right = node3;
+    
+    node2->left = node8;
+    node2->right = node11;
+
+    // Test
+    printf("Inorder \n");
+    inOrderTraversal(root);
+    printf("\n");
+    printf("Preorder \n");
+	preOrderTraversal(root);
+    printf("\n");
+    printf("Postorder \n");
+    postOrderTraversal(root);
+
+    free(node12);
+    free(node13);
+    free(node7);
+    free(node14);
+    free(node2);
+    free(node17);
+    free(node23);
+    free(node27);
+    free(node3);
+    free(node8);
+    free(node11);
+
+
+    return 0;
+}
+
+//C
